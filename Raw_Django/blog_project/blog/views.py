@@ -23,7 +23,7 @@ def post_list(request):
         # If page_number is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
     context = {'posts': posts}
-    return render(request, 'blog/post/list.html', context=context)
+    return render(request, 'blog/post/list.html', context)
 
 def post_detail(request, year, month, day, post):
     #Using get_object_or_404 is neater than using the try/except method
@@ -37,7 +37,7 @@ def post_detail(request, year, month, day, post):
     comments = post.comments.filter(active=True)
     form = CommentForm()
     context = {'post': post, 'comments': comments, 'form': form}
-    return render(request, 'blog/post/detail.html', context=context)
+    return render(request, 'blog/post/detail.html', context)
 
 class PostListView(ListView):
     """
@@ -76,7 +76,7 @@ def post_share(request, post_id):
         else:
             form = EmailPostForm()
         context = {'form': form, 'post': post, 'sent': sent}
-        return render(request, 'blog/post/share.html', context=context)
+        return render(request, 'blog/post/share.html', context)
     
 @require_POST
 def post_comment(request, post_id):
@@ -94,4 +94,4 @@ def post_comment(request, post_id):
         # Save the comment to the database
         comment.save()
     context = {'comment': comment, 'post': post, 'form': form}
-    return render(request, 'blog/post/comment.html', context=context)
+    return render(request, 'blog/post/comment.html', context)
