@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from rest_framework.response import Response
 from rest_framework import viewsets
+from .serializer import ServerSerializer
 
 from .models import Server
 
@@ -13,5 +15,8 @@ class ServerListViewSet(viewsets.ViewSet):
 
         if category:
             self.queryset.filter(category = category)
+
+        serializer = ServerSerializer(self.queryset, many=True)
+        return Response(serializer.data)
 
         
