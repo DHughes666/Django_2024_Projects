@@ -34,7 +34,7 @@ class Channel(models.Model):
         related_name="channel_server")
     
     def save(self, *args, **kwargs):
-        self.name = self.lower()
+        self.name = self.name.lower()
         super(Channel, self).save(*args, **kwargs)
     
     def __str__(self):
