@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError, AuthenticationFailed
 from .serializer import ServerSerializer
 from .models import Server
+from .schema import server_list_docs
 
 # Define a class for handling server list view set
 class ServerListViewSet(viewsets.ViewSet):
@@ -13,6 +14,7 @@ class ServerListViewSet(viewsets.ViewSet):
     queryset = Server.objects.all()
 
     # Define a method to handle GET requests for listing servers
+    @server_list_docs
     def list(self, request):
         # Extract query parameters from the request
         category = request.query_params.get('category')
@@ -22,8 +24,8 @@ class ServerListViewSet(viewsets.ViewSet):
         with_num_members = request.query_params.get('with_num_members') == 'true'
 
         # Check authentication for user-specific queries
-        if by_user or by_serverId and not request.user.is_authenticated:
-            raise AuthenticationFailed()
+        # if by_user or by_serverId and not request.user.is_authenticated:
+        #     raise AuthenticationFailed()
 
         # Apply filters based on query parameters
         if category:
@@ -34,8 +36,11 @@ class ServerListViewSet(viewsets.ViewSet):
 
         if by_user:
             # Filter servers based on the requesting user
-            user_id = request.user.id
-            self.queryset = self.queryset.filter(member=user_id)
+            if by_user and request.user.is_authenticated:
+                user_id = request.user.id
+                self.queryset = self.queryset.filter(member=user_id)
+            else:
+                raise AuthenticationFailed()
 
         if qty:
             # Limit the queryset to a specified quantity
