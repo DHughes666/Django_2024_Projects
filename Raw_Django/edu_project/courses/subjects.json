@@ -1,0 +1,42 @@
+[
+{
+  "model": "courses.subject",
+  "pk": 6,
+  "fields": {
+    "title": "Mathematics",
+    "slug": "mathematics"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 7,
+  "fields": {
+    "title": "Computing",
+    "slug": "computing"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 8,
+  "fields": {
+    "title": "Psychohistory",
+    "slug": "psychohistory"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 9,
+  "fields": {
+    "title": "Genetics",
+    "slug": "genetics"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 10,
+  "fields": {
+    "title": "Economics",
+    "slug": "economics"
+  }
+}
+]
