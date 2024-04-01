@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from .fields import OrderField
@@ -18,7 +18,7 @@ class Subject(models.Model):
     
 
 class Course(models.Model):
-    owner = models.ForeignKey(User, 
+    owner = models.ForeignKey(get_user_model(), 
                               related_name='teacher',
                               on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, related_name='courses',
@@ -27,7 +27,7 @@ class Course(models.Model):
     slug = models.CharField(max_length=200, unique=True)
     overview = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    students = models.ManyToManyField(User,
+    students = models.ManyToManyField(get_user_model(),
                                       related_name='courses_joined',
                                       blank=True)
 
@@ -76,7 +76,7 @@ class Content(models.Model):
 
 
 class ItemBase(models.Model):
-    owner = models.ForeignKey(User,
+    owner = models.ForeignKey(get_user_model(),
                               related_name='%(class)s_related',
                               on_delete=models.CASCADE)
     title = models.CharField(max_length=250)

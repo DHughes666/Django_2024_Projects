@@ -1,0 +1,58 @@
+{% extends '_base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block header %}My Django Site{% endblock %}
+
+{% block content %}
+    <div class="flex justify-center items-center h-screen">
+        
+        <form class="w-full max-w-sm" method="POST">
+            {% csrf_token %}
+            <div class="flex items-center justify-center">
+                <h3 class="bg-green-500 text-white text-justify text-xl font-bold py-2 px-40 rounded mb-6">Sign up</h3>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="inputEmail">
+                    Email
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inputEmail" name="email" type="email" placeholder="Email">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="inputUsername">
+                    Username
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inputUsername" name="username" type="text" placeholder="Username">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="inputPassword1">
+                    Password
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inputPassword1" name="password1" type="password" placeholder="Password">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2" for="inputPassword2">
+                    Confirm Password
+                </label>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inputPassword2" name="password2" type="password" placeholder="Confirm Password">
+            </div>
+
+            
+            {% if registration_form.errors or registration_form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for field in registration_form %}  
+                        {{ field.errors }}
+                    {% endfor %}
+                        
+                    {{ registration_form.non_field_errors }}          
+                </div>
+            {% endif %}
+
+            <div class="flex items-center justify-center">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

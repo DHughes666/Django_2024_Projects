@@ -45,4 +45,5 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
             authentication_classes=[BaseAuthentication],
             permission_classes=[IsAuthenticated, IsEnrolled])
     def contents(self, request, *args, **kwargs):
+        self.user = request.user
         return self.retrieve(request, *args, **kwargs)
