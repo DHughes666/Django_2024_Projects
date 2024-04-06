@@ -1,4 +1,4 @@
-from rest_framework.authentication import BaseAuthentication
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -21,7 +21,7 @@ class SubjectDetailView(generics.RetrieveAPIView):
     serializer_class = SubjectSerializer
 
 class CourseEnrollView(APIView):
-    authentication_classes = [BaseAuthentication]
+    authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
     def post(self, request, pk, format=None):
         course = get_object_or_404(Course, pk=pk)
@@ -33,7 +33,7 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CourseSerializer
 
     @action(detail=True, methods=['post'],
-            authentication_classes=[BaseAuthentication],
+            authentication_classes=[BasicAuthentication],
             permission_classes=[IsAuthenticated])
     def enroll(self, request, pk, *args, **kwargs):
         course = self.get_object()
@@ -42,7 +42,7 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     
     @action(detail=True, methods=['get'],
             serializer_class=CourseWithContentsSerializer,
-            authentication_classes=[BaseAuthentication],
+            authentication_classes=[BasicAuthentication],
             permission_classes=[IsAuthenticated, IsEnrolled])
     def contents(self, request, *args, **kwargs):
         self.user = request.user
