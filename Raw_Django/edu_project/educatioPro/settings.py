@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'accounty.apps.AccountyConfig',
     'courses.apps.CoursesConfig',
     'students.apps.StudentsConfig',
@@ -44,9 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'embed_video',
     'rest_framework',
-    'channels',
 ]
 
+ASGI_APPLICATION = 'educatioPro.asgi.application'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
