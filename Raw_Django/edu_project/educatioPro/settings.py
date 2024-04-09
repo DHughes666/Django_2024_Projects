@@ -155,3 +155,13 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
     'accounty.backends.CaseInsensitiveModelBackend'
 )
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channel_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}
