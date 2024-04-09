@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'daphne',
+    'channels',
     'accounty.apps.AccountyConfig',
     'courses.apps.CoursesConfig',
     'students.apps.StudentsConfig',
